@@ -93,7 +93,7 @@ p6df::modules::shell::external::brew() {
   brew install bats-core
   brew install bats-file
   brew install bats-assert
-  brew install bats-detik
+  brew install bats-mock
 
   brew install jq
   brew install yq
