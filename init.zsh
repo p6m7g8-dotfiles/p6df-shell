@@ -7,7 +7,7 @@
 ######################################################################
 p6df::modules::shell::deps() {
   ModuleDeps=(
-    p6m7g8/p6shell
+    p6m7g8-dotfiles/p6shell
     ohmyzsh/ohmyzsh:plugins/encode64
     ohmyzsh/ohmyzsh:plugins/nmap
     samoshkin/tmux-config
