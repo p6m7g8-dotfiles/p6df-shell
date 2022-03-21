@@ -11,8 +11,6 @@ p6df::modules::shell::deps() {
     ohmyzsh/ohmyzsh:plugins/encode64
     ohmyzsh/ohmyzsh:plugins/nmap
     samoshkin/tmux-config
-    #    junegunn/fzf
-    #    lotabout/skim
   )
 }
 
@@ -27,6 +25,7 @@ p6df::modules::shell::deps() {
 p6df::modules::shell::external:::home::symlink() {
 
   p6_file_symlink "$P6_DFZ_SRC_DIR/$USER/home-private/gnupg" ".gnupg"
+  p6_file_symlink "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-shell/share/.parallel"
 }
 
 ######################################################################
@@ -79,8 +78,10 @@ p6df::modules::shell::vscodes() {
 ######################################################################
 p6df::modules::shell::external::brew() {
 
-  #  brew tap sbdchd/skim
-  #  brew install skim
+  brew tap sbdchd/skim
+  brew install skim
+
+  brew install fzf
 
   brew install aspell
   brew install coreutils
@@ -137,6 +138,8 @@ p6df::modules::shell::external::brew() {
   brew install nmap
   brew install netcat
   brew install vault
+
+  brew install ffpmeg
 
   p6_return_void
 
@@ -316,7 +319,7 @@ p6df::modules::shell::proxy::off() {
 #
 #  Args:
 #	cmd -
-#	... - 
+#	... -
 #
 #  Returns:
 #	code - rc
