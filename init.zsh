@@ -19,7 +19,8 @@ p6df::modules::shell::deps() {
 #
 # Function: p6df::modules::shell::external:::home::symlink()
 #
-#  Environment:	 P6_DFZ_SRC_DIR
+#  Depends:	 p6_file
+#  Environment:	 P6_DFZ_SRC_DIR P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
 #>
 ######################################################################
 p6df::modules::shell::external:::home::symlink() {
@@ -162,6 +163,20 @@ p6df::modules::shell::init() {
   # . $P6_DFZ_SRC_DIR/lotabout/skim/shell/completion.zsh
 
   p6df::modules::shell::aliases::init
+  p6df::modules::shell::prompt::init
+}
+
+######################################################################
+#<
+#
+# Function: p6df::modules::shell::prompt::init()
+#
+#  Depends:	 p6_proxy
+#>
+######################################################################
+p6df::modules::shell::prompt::init() {
+
+  p6df::core::prompt::line::add "p6df::modules::shell::proxy::prompt::line"
 }
 
 ######################################################################
@@ -251,7 +266,7 @@ p6df::modules::shell:replace() {
 #
 # Function: p6df::modules::shell::proxy::prompt::line()
 #
-#  Depends:	 p6_proxy p6_string
+#  Depends:	 p6_proxy p6_run
 #>
 ######################################################################
 p6df::modules::shell::proxy::prompt::line() {
@@ -319,7 +334,7 @@ p6df::modules::shell::proxy::off() {
 #
 #  Args:
 #	cmd -
-#	... -
+#	... - 
 #
 #  Returns:
 #	code - rc

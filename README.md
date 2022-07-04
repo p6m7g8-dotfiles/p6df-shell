@@ -51,6 +51,7 @@
 - p6df::modules::shell::external::brew()
 - p6df::modules::shell::external::yum()
 - p6df::modules::shell::init()
+- p6df::modules::shell::prompt::init()
 - p6df::modules::shell::proxy::off()
 - p6df::modules::shell::proxy::prompt::line()
 - p6df::modules::shell::tmux::attach(session)
