@@ -140,7 +140,7 @@ p6df::modules::shell::external::brew() {
   brew install netcat
   brew install vault
 
-  brew install ffpmeg
+  brew install ffmpeg
 
   p6_return_void
 
