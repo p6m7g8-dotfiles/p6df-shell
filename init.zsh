@@ -63,9 +63,12 @@ p6df::modules::shell::vscodes() {
 
   # shell
   brew install shfmt
-  code --install-extension timonwong.shellcheck
+
   code --install-extension foxundermoon.shell-format
   code --install-extension jetmartin.bats
+  code --install-extension timonwong.shellcheck
+  code --install-extensionms-vscode-remote.remote-ssh
+  code --install-extensionms-vscode-remote.remote-ssh-edit
 }
 
 ######################################################################
@@ -332,7 +335,7 @@ p6df::modules::shell::proxy::off() {
 #
 #  Args:
 #	cmd -
-#	... - 
+#	... -
 #
 #  Returns:
 #	code - rc
