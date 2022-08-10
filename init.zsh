@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 ######################################################################
 #<
 #
@@ -17,7 +18,6 @@ p6df::modules::shell::deps() {
 #
 # Function: p6df::modules::shell::external:::home::symlink()
 #
-#  Depends:	 p6_file
 #  Environment:	 P6_DFZ_SRC_DIR P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
 #>
 ######################################################################
@@ -25,6 +25,8 @@ p6df::modules::shell::external:::home::symlink() {
 
   p6_file_symlink "$P6_DFZ_SRC_DIR/$USER/home-private/gnupg" ".gnupg"
   p6_file_symlink "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-shell/share/.parallel"
+
+  p6_return_void
 }
 
 ######################################################################
@@ -50,6 +52,8 @@ p6df::modules::shell::external::yum() {
   sudo yum install curl
   sudo yum install wget
   sudo yum install lsof
+
+  p6_return_void
 }
 
 ######################################################################
@@ -67,8 +71,10 @@ p6df::modules::shell::vscodes() {
   code --install-extension foxundermoon.shell-format
   code --install-extension jetmartin.bats
   code --install-extension timonwong.shellcheck
-  code --install-extensionms-vscode-remote.remote-ssh
-  code --install-extensionms-vscode-remote.remote-ssh-edit
+  code --install-extension ms-vscode-remote.remote-ssh
+  code --install-extension ms-vscode-remote.remote-ssh-edit
+
+  p6_return_void
 }
 
 ######################################################################
@@ -144,7 +150,6 @@ p6df::modules::shell::external::brew() {
   brew install ffmpeg
 
   p6_return_void
-
 }
 
 ######################################################################
@@ -165,19 +170,8 @@ p6df::modules::shell::init() {
 
   p6df::modules::shell::aliases::init
   p6df::modules::shell::prompt::init
-}
 
-######################################################################
-#<
-#
-# Function: p6df::modules::shell::prompt::init()
-#
-#  Depends:	 p6_proxy
-#>
-######################################################################
-p6df::modules::shell::prompt::init() {
-
-  p6df::core::prompt::line::add "p6df::modules::shell::proxy::prompt::line"
+  p6_return_void
 }
 
 ######################################################################
@@ -185,7 +179,6 @@ p6df::modules::shell::prompt::init() {
 #
 # Function: p6df::modules::shell::aliases::init()
 #
-#  Depends:	 p6_proxy
 #  Environment:	 ESTABLISHED FGT LISTEN LSCOLORS OSTYPE TCP TERM USER XXX
 #>
 ######################################################################
@@ -228,7 +221,7 @@ p6df::modules::shell::aliases::init() {
   alias replace='p6df::modules::shell:replace'
   alias proxy_off='p6df::modules::shell::proxy::off'
 
-  export LSCOLORS=Gxfxcxdxbxegedabagacad
+  p6_env_export LSCOLORS "Gxfxcxdxbxegedabagacad"
   case "$OSTYPE" in
   freebsd* | darwin*) alias ll='ls -alFGTh' ;;
   *) alias ll='/bin/ls -alFh --color=auto' ;;
@@ -238,6 +231,8 @@ p6df::modules::shell::aliases::init() {
 
   # XXX: not here
   zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
+
+  p6_return_void
 }
 
 ######################################################################
@@ -249,7 +244,6 @@ p6df::modules::shell::aliases::init() {
 #	from -
 #	to -
 #
-#  Depends:	 p6_proxy
 #>
 ######################################################################
 p6df::modules::shell:replace() {
@@ -260,6 +254,20 @@ p6df::modules::shell:replace() {
     egrep -v '/.git/|/elpa/' |
     xargs grep -l $from |
     xargs perl -pi -e "s,$from,$to,g"
+
+  p6_return_void
+}
+
+######################################################################
+#<
+#
+# Function: p6df::modules::shell::prompt::init()
+#
+#>
+######################################################################
+p6df::modules::shell::prompt::init() {
+
+  p6df::core::prompt::line::add "p6df::modules::shell::proxy::prompt::line"
 }
 
 ######################################################################
@@ -267,7 +275,6 @@ p6df::modules::shell:replace() {
 #
 # Function: p6df::modules::shell::proxy::prompt::line()
 #
-#  Depends:	 p6_proxy p6_run
 #>
 ######################################################################
 p6df::modules::shell::proxy::prompt::line() {
@@ -283,7 +290,6 @@ p6df::modules::shell::proxy::prompt::line() {
 #  Returns:
 #	str - str
 #
-#  Depends:	 p6_run p6_string
 #  Environment:	 _PROXY
 #>
 ######################################################################
@@ -313,7 +319,6 @@ p6_proxy_prompt_info() {
 #
 # Function: p6df::modules::shell::proxy::off()
 #
-#  Depends:	 p6_run
 #  Environment:	 XXX
 #>
 ######################################################################
@@ -326,6 +331,8 @@ p6df::modules::shell::proxy::off() {
     echo $e
     unset $e
   done
+
+  p6_return_void
 }
 
 ######################################################################
@@ -335,12 +342,11 @@ p6df::modules::shell::proxy::off() {
 #
 #  Args:
 #	cmd -
-#	... -
+#	... - 
 #
 #  Returns:
 #	code - rc
 #
-#  Depends:	 p6_run
 #>
 ######################################################################
 p6_shell_tmux_cmd() {
