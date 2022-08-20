@@ -9,7 +9,6 @@
 p6df::modules::shell::deps() {
   ModuleDeps=(
     p6m7g8-dotfiles/p6shell
-    samoshkin/tmux-config
   )
 }
 
@@ -82,6 +81,7 @@ p6df::modules::shell::vscodes() {
 #
 # Function: p6df::modules::shell::external::brew()
 #
+#  Environment:	 P6_DFZ_SRC_DIR
 #>
 ######################################################################
 p6df::modules::shell::external::brew() {
@@ -109,9 +109,6 @@ p6df::modules::shell::external::brew() {
   brew install yq
 
   brew install recode
-
-  brew install screen
-  brew install tmux
 
   brew install tree
 
@@ -143,33 +140,10 @@ p6df::modules::shell::external::brew() {
   brew install gnupg2
   brew install pass
   brew install pinentry-mac
-  brew install nmap
   brew install netcat
   brew install vault
 
   brew install ffmpeg
-
-  p6_return_void
-}
-
-######################################################################
-#<
-#
-# Function: p6df::modules::shell::init()
-#
-#  Environment:	 P6_DFZ_SRC_DIR
-#>
-######################################################################
-p6df::modules::shell::init() {
-
-  # zgen load junegunn/fzf shell # completions
-  # : prompt_opts+=(cr percent sp subst)
-
-  # . $P6_DFZ_SRC_DIR/lotabout/skim/shell/key-bindings.zsh
-  # . $P6_DFZ_SRC_DIR/lotabout/skim/shell/completion.zsh
-
-  p6df::modules::shell::aliases::init
-  p6df::modules::shell::prompt::init
 
   p6_return_void
 }
@@ -229,6 +203,14 @@ p6df::modules::shell::aliases::init() {
 
   alias ssh_key_check=p6_ssh_key_check
 
+
+  p6_return_void
+}
+
+p6df::modules::shell::completions::init() {
+  local module="$1"
+  local dir="$1"
+
   # XXX: not here
   zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
 
@@ -256,163 +238,4 @@ p6df::modules::shell:replace() {
     xargs perl -pi -e "s,$from,$to,g"
 
   p6_return_void
-}
-
-######################################################################
-#<
-#
-# Function: p6df::modules::shell::prompt::init()
-#
-#>
-######################################################################
-p6df::modules::shell::prompt::init() {
-
-  p6df::core::prompt::line::add "p6df::modules::shell::proxy::prompt::line"
-}
-
-######################################################################
-#<
-#
-# Function: p6df::modules::shell::proxy::prompt::line()
-#
-#>
-######################################################################
-p6df::modules::shell::proxy::prompt::line() {
-
-  p6_proxy_prompt_info
-}
-
-######################################################################
-#<
-#
-# Function: str str = p6_proxy_prompt_info()
-#
-#  Returns:
-#	str - str
-#
-#  Environment:	 _PROXY
-#>
-######################################################################
-p6_proxy_prompt_info() {
-
-  local __p6_lf="
-"
-  local pair
-  local str
-  for pair in $(env | grep _PROXY=); do
-    if p6_string_blank "$str"; then
-      str="proxy:\t  $pair"
-    else
-      str=$(p6_string_append "$str" "proxy:\t  $pair" "$__p6_lf")
-    fi
-  done
-
-  if ! p6_string_blank "$str"; then
-    p6_return_str "$str"
-  else
-    p6_return_void
-  fi
-}
-
-######################################################################
-#<
-#
-# Function: p6df::modules::shell::proxy::off()
-#
-#  Environment:	 XXX
-#>
-######################################################################
-p6df::modules::shell::proxy::off() {
-
-  # XXX: move to lib
-  local ev
-  for ev in $(env | grep -i proxy=); do
-    e=$(echo $ev | cut -f 1 -d =)
-    echo $e
-    unset $e
-  done
-
-  p6_return_void
-}
-
-######################################################################
-#<
-#
-# Function: code rc = p6_shell_tmux_cmd(cmd, ...)
-#
-#  Args:
-#	cmd -
-#	... - 
-#
-#  Returns:
-#	code - rc
-#
-#>
-######################################################################
-p6_shell_tmux_cmd() {
-  local cmd="$1"
-  shift 1
-
-  local log_type
-  case $cmd in
-  *) log_type=p6_run_write_cmd ;;
-  esac
-
-  p6_run_code "$log_type tmux $cmd $*"
-  local rc=$?
-
-  p6_return_code_as_code "$rc"
-}
-
-######################################################################
-#<
-#
-# Function: p6df::modules::shell::tmux::new(session, cmd)
-#
-#  Args:
-#	session -
-#	cmd -
-#
-#>
-######################################################################
-p6df::modules::shell::tmux::new() {
-  local session="$1"
-  local cmd="$2"
-
-  p6_shell_tmux_cmd "new -s \"$session\" $cmd"
-}
-
-######################################################################
-#<
-#
-# Function: p6df::modules::shell::tmux::attach(session)
-#
-#  Args:
-#	session -
-#
-#>
-######################################################################
-p6df::modules::shell::tmux::attach() {
-  local session="$1"
-
-  p6_shell_tmux_cmd "attach -d -t \"$session\""
-}
-
-######################################################################
-#<
-#
-# Function: p6df::modules::shell::tmux::make(session, cmd)
-#
-#  Args:
-#	session -
-#	cmd -
-#
-#>
-######################################################################
-p6df::modules::shell::tmux::make() {
-  local session="$1"
-  local cmd="$2"
-
-  p6df::modules::shell::tmux::attach "$session" ||
-    p6df::modules::shell::tmux::new "$session" "$cmd"
 }
