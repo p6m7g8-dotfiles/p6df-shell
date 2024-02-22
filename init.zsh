@@ -144,6 +144,7 @@ p6df::modules::shell::external::brew() {
   brew install vault
 
   brew install ffmpeg
+  arch -x86_64 brew install imagemagick
 
   p6_return_void
 }
@@ -202,7 +203,6 @@ p6df::modules::shell::aliases::init() {
   esac
 
   alias ssh_key_check=p6_ssh_key_check
-
 
   p6_return_void
 }
