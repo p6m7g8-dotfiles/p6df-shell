@@ -45,6 +45,7 @@
 #### p6df-shell/init.zsh:
 
 - p6df::modules::shell::aliases::init()
+- p6df::modules::shell::completions::init(module, dir)
 - p6df::modules::shell::deps()
 - p6df::modules::shell::external:::home::symlink()
 - p6df::modules::shell::external::brew()

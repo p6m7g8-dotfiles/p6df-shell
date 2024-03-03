@@ -81,7 +81,7 @@ p6df::modules::shell::vscodes() {
 #
 # Function: p6df::modules::shell::external::brew()
 #
-#  Environment:	 P6_DFZ_SRC_DIR
+#  Environment:	 _64
 #>
 ######################################################################
 p6df::modules::shell::external::brew() {
@@ -118,8 +118,6 @@ p6df::modules::shell::external::brew() {
   brew install httpie
   brew install mtr
 
-  brew install youtube-dl
-
   brew install xz
 
   brew install z
@@ -137,11 +135,10 @@ p6df::modules::shell::external::brew() {
   brew install ripgrep-all
 
   brew install gpg
-  brew install gnupg2
+  brew install gnupg
   brew install pass
   brew install pinentry-mac
   brew install netcat
-  brew install vault
 
   brew install ffmpeg
   arch -x86_64 brew install imagemagick
@@ -154,7 +151,7 @@ p6df::modules::shell::external::brew() {
 #
 # Function: p6df::modules::shell::aliases::init()
 #
-#  Environment:	 ESTABLISHED FGT LISTEN LSCOLORS OSTYPE TCP TERM USER XXX
+#  Environment:	 ESTABLISHED FGT LISTEN LSCOLORS OSTYPE TCP TERM USER
 #>
 ######################################################################
 p6df::modules::shell::aliases::init() {
@@ -207,6 +204,18 @@ p6df::modules::shell::aliases::init() {
   p6_return_void
 }
 
+######################################################################
+#<
+#
+# Function: p6df::modules::shell::completions::init(module, dir)
+#
+#  Args:
+#	module -
+#	dir -
+#
+#  Environment:	 XXX
+#>
+######################################################################
 p6df::modules::shell::completions::init() {
   local module="$1"
   local dir="$1"
