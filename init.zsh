@@ -141,7 +141,7 @@ p6df::modules::shell::external::brew() {
   brew install netcat
 
   brew install ffmpeg
-  arch -x86_64 brew install imagemagick
+  arch -arm64 brew install imagemagick
 
   p6_return_void
 }
