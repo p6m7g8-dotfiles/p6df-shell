@@ -81,7 +81,6 @@ p6df::modules::shell::vscodes() {
 #
 # Function: p6df::modules::shell::external::brew()
 #
-#  Environment:	 _64
 #>
 ######################################################################
 p6df::modules::shell::external::brew() {
