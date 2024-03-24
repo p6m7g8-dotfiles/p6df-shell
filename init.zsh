@@ -40,8 +40,8 @@ p6df::modules::shell::external::yum() {
   sudo amazon-linux-extras install epel
   sudo yum install ShellCheck
 
-  wget https://github.com/mikefarah/yq/releases/download/v4.6.3/yq_linux_amd64.tar.gz -O - | tar xz
-  sudo mv yq_linux_amd64 /usr/bin/yq
+  wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq 
+  sudo chmod +x /usr/bin/yq
 
   sudo yum install jq
   sudo yum install recode
@@ -65,7 +65,7 @@ p6df::modules::shell::external::yum() {
 p6df::modules::shell::vscodes() {
 
   # shell
-  brew install shfmt
+  p6df::modules::homebrew::cli::brew::install shfmt
 
   code --install-extension foxundermoon.shell-format
   code --install-extension jetmartin.bats
@@ -85,62 +85,66 @@ p6df::modules::shell::vscodes() {
 ######################################################################
 p6df::modules::shell::external::brew() {
 
+  p6df::modules::homebrew::cli::brew::install lsd
+
   brew tap sbdchd/skim
-  brew install skim
+  p6df::modules::homebrew::cli::brew::install skim
 
-  brew install fzf
+  p6df::modules::homebrew::cli::brew::install fzf
 
-  brew install aspell
-  brew install coreutils
-  brew install parallel
+  p6df::modules::homebrew::cli::brew::install aspell
+  p6df::modules::homebrew::cli::brew::install coreutils
+  p6df::modules::homebrew::cli::brew::install parallel
 
-  brew install shellcheck
+  p6df::modules::homebrew::cli::brew::install shellcheck
 
   brew tap kaos/shell
-  brew install bats-core
-  brew install bats-file
-  brew install bats-assert
-  brew install bats-mock
+  p6df::modules::homebrew::cli::brew::install bats-core
+  p6df::modules::homebrew::cli::brew::install bats-file
+  p6df::modules::homebrew::cli::brew::install bats-assert
+  p6df::modules::homebrew::cli::brew::install bats-mock
 
-  brew install jc
-  brew install jp
-  brew install jq
-  brew install yq
+  p6df::modules::homebrew::cli::brew::install jc
+  p6df::modules::homebrew::cli::brew::install jp
+  p6df::modules::homebrew::cli::brew::install jq
+  p6df::modules::homebrew::cli::brew::install yq
 
-  brew install recode
+  p6df::modules::homebrew::cli::brew::install xsv
 
-  brew install tree
+  p6df::modules::homebrew::cli::brew::install recode
 
-  brew install aria2
-  brew install curl
-  brew install wget
-  brew install httpie
-  brew install mtr
+  p6df::modules::homebrew::cli::brew::install tree
 
-  brew install xz
+  p6df::modules::homebrew::cli::brew::install aria2
+  p6df::modules::homebrew::cli::brew::install curl
+  p6df::modules::homebrew::cli::brew::install wget
+  p6df::modules::homebrew::cli::brew::install httpie
+  p6df::modules::homebrew::cli::brew::install mtr
 
-  brew install z
+  p6df::modules::homebrew::cli::brew::install xz
 
-  brew install htop
-  brew install lsof
+  p6df::modules::homebrew::cli::brew::install z
 
-  brew install bgrep
-  brew install cgrep
-  brew install grepcidr
-  brew install ngrep
-  brew install pgrep
-  brew install pdfgrep
-  brew install psgrep
-  brew install ripgrep-all
+  p6df::modules::homebrew::cli::brew::install htop
+  p6df::modules::homebrew::cli::brew::install lsof
 
-  brew install gpg
-  brew install gnupg
-  brew install pass
-  brew install pinentry-mac
-  brew install netcat
+  p6df::modules::homebrew::cli::brew::install bgrep
+  p6df::modules::homebrew::cli::brew::install cgrep
+  p6df::modules::homebrew::cli::brew::install grepcidr
+  p6df::modules::homebrew::cli::brew::install ngrep
+  p6df::modules::homebrew::cli::brew::install pgrep
+  p6df::modules::homebrew::cli::brew::install pdfgrep
+  p6df::modules::homebrew::cli::brew::install psgrep
+  p6df::modules::homebrew::cli::brew::install ripgrep-all
 
-  brew install ffmpeg
-  arch -arm64 brew install imagemagick
+  p6df::modules::homebrew::cli::brew::install gpg
+  p6df::modules::homebrew::cli::brew::install gnupg
+  p6df::modules::homebrew::cli::brew::install pass
+  p6df::modules::homebrew::cli::brew::install pinentry-mac
+  p6df::modules::homebrew::cli::brew::install netcat
+
+  p6df::modules::homebrew::cli::brew::install ffmpeg
+  arch -arm64 p6df::modules::homebrew::cli::brew::install imagemagick
 
   p6_return_void
 }
@@ -148,12 +152,18 @@ p6df::modules::shell::external::brew() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::shell::aliases::init()
+# Function: p6df::modules::shell::aliases::init(_module, dir)
 #
-#  Environment:	 ESTABLISHED FGT LISTEN LSCOLORS OSTYPE TCP TERM USER
+#  Args:
+#	_module -
+#	dir -
+#
+#  Environment:	 ESTABLISHED FGT LISTEN LSCOLORS OSTYPE TERM USER
 #>
 ######################################################################
 p6df::modules::shell::aliases::init() {
+  local _module="$1"
+  local dir="$2"
 
   alias '_'='sudo'
   alias rmrf='rm -rf'
@@ -174,9 +184,6 @@ p6df::modules::shell::aliases::init() {
 
   alias whichlinux='uname -a; cat /etc/*release; cat /etc/issue'
 
-  alias flushdns='sudo dscacheutil -flushcache'
-  alias whotunes='lsof -r 2 -n -P -F n -c iTunes -a -i TCP@`hostname`:3689'
-
   alias netstat='netstat -an -p tcp'
   alias listen='netstat -an -p tcp | grep LISTEN'
   alias listenu='netstat -an -p udp'
@@ -189,8 +196,6 @@ p6df::modules::shell::aliases::init() {
   alias -g ng='| grep -v "\.git"'
 
   alias xclean='p6_xclean'
-  alias replace='p6df::modules::shell:replace'
-  alias proxy_off='p6df::modules::shell::proxy::off'
 
   p6_env_export LSCOLORS "Gxfxcxdxbxegedabagacad"
   case "$OSTYPE" in
@@ -199,51 +204,6 @@ p6df::modules::shell::aliases::init() {
   esac
 
   alias ssh_key_check=p6_ssh_key_check
-
-  p6_return_void
-}
-
-######################################################################
-#<
-#
-# Function: p6df::modules::shell::completions::init(module, dir)
-#
-#  Args:
-#	module -
-#	dir -
-#
-#  Environment:	 XXX
-#>
-######################################################################
-p6df::modules::shell::completions::init() {
-  local module="$1"
-  local dir="$1"
-
-  # XXX: not here
-  zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
-
-  p6_return_void
-}
-
-######################################################################
-#<
-#
-# Function: p6df::modules::shell:replace(from, to)
-#
-#  Args:
-#	from -
-#	to -
-#
-#>
-######################################################################
-p6df::modules::shell:replace() {
-  local from="$1"
-  local to="$2"
-
-  find . -type f |
-    egrep -v '/.git/|/elpa/' |
-    xargs grep -l $from |
-    xargs perl -pi -e "s,$from,$to,g"
 
   p6_return_void
 }
