@@ -10,8 +10,7 @@
   - [Summary](#summary)
   - [Contributing](#contributing)
   - [Code of Conduct](#code-of-conduct)
-  - [Changes](#changes)
-    - [Usage](#usage)
+  - [Usage](#usage)
   - [Author](#author)
 
 ### Badges
@@ -34,24 +33,24 @@
 
 - [Code of Conduct](https://github.com/p6m7g8/.github/blob/master/CODE_OF_CONDUCT.md)
 
-## Changes
-
-- [Change Log](CHANGELOG.md)
-
 ## Usage
+
+
+### Aliases
+
+
+### Functions
 
 ### p6df-shell:
 
 #### p6df-shell/init.zsh:
 
-- p6df::modules::shell::aliases::init()
-- p6df::modules::shell::completions::init(module, dir)
+- p6df::modules::shell::aliases::init(_module, dir)
 - p6df::modules::shell::deps()
 - p6df::modules::shell::external:::home::symlink()
 - p6df::modules::shell::external::brew()
 - p6df::modules::shell::external::yum()
 - p6df::modules::shell::vscodes()
-- p6df::modules::shell:replace(from, to)
 
 
 
