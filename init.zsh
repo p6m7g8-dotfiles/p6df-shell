@@ -118,7 +118,7 @@ p6df::modules::shell::external::brew() {
   p6df::modules::homebrew::cli::brew::install aria2
   p6df::modules::homebrew::cli::brew::install curl
   p6df::modules::homebrew::cli::brew::install wget
-  p6df::modules::homebrew::cli::brew::install httpie
+  p6df::modules::homebrew::cli::brew::install httpie --formula
   p6df::modules::homebrew::cli::brew::install mtr
 
   p6df::modules::homebrew::cli::brew::install xz
