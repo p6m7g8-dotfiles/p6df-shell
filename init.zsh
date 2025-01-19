@@ -88,7 +88,7 @@ p6df::modules::shell::external::brew() {
   p6df::modules::homebrew::cli::brew::install lsd
 
   brew tap sbdchd/skim
-  p6df::modules::homebrew::cli::brew::install skim
+  p6df::modules::homebrew::cli::brew::install skim --cask
 
   p6df::modules::homebrew::cli::brew::install fzf
 
