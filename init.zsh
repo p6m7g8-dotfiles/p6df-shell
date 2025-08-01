@@ -109,8 +109,6 @@ p6df::modules::shell::external::brew() {
   p6df::modules::homebrew::cli::brew::install jq
   p6df::modules::homebrew::cli::brew::install yq
 
-  p6df::modules::homebrew::cli::brew::install xsv
-
   p6df::modules::homebrew::cli::brew::install recode
 
   p6df::modules::homebrew::cli::brew::install tree
