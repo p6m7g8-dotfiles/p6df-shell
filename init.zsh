@@ -209,6 +209,36 @@ p6df::modules::shell::aliases::init() {
 ######################################################################
 #<
 #
+# Function: p6df::modules::shell::path::init()
+#
+#  Environment:	 HOMEBREW_PREFIX
+#>
+######################################################################
+p6df::modules::shell::path::init() {
+
+  p6_path_if "$HOMEBREW_PREFIX/opt/lsof/bin" "prepend"
+  p6_path_if "$HOMEBREW_PREFIX/opt/curl/bin" "prepend"
+
+  p6_return_void
+}
+
+######################################################################
+#<
+#
+# Function: p6df::modules::shell::init()
+#
+#>
+######################################################################
+p6df::modules::shell::init() {
+
+  p6df::modules::shell::path::init
+
+  p6_return_void
+}
+
+######################################################################
+#<
+#
 # Function: stream  = p6_shell_tcp_is(port)
 #
 #  Args:
