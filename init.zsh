@@ -66,12 +66,11 @@ p6df::modules::shell::vscodes() {
 
   # shell
   p6df::modules::homebrew::cli::brew::install shfmt
-
   code --install-extension foxundermoon.shell-format
-  code --install-extension jetmartin.bats
+
   code --install-extension timonwong.shellcheck
+  code --install-extension jetmartin.bats
   code --install-extension ms-vscode-remote.remote-ssh
-  code --install-extension ms-vscode-remote.remote-ssh-edit
 
   p6_return_void
 }
