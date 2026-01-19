@@ -8,7 +8,7 @@
 ######################################################################
 p6df::modules::shell::deps() {
   ModuleDeps=(
-    p6m7g8-dotfiles/p6shell
+    p6m7g8-dotfiles/p6common
   )
 }
 
@@ -40,7 +40,7 @@ p6df::modules::shell::external::yum() {
   sudo amazon-linux-extras install epel
   sudo yum install ShellCheck
 
-  wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq 
+  wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq
   sudo chmod +x /usr/bin/yq
 
   sudo yum install jq
@@ -256,4 +256,3 @@ p6_shell_tcp_is() {
 
   p6_return_stream
 }
-
