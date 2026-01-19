@@ -189,7 +189,7 @@ p6df::modules::shell::aliases::init() {
   alias tarx='tar -xvzof'
   alias tart='tar -tvzf'
 
-  alias -g me="| grep $USER"
+  alias -g me='| grep $USER'
   alias -g ng='| grep -v "\.git"'
 
   alias xclean='p6_xclean'
@@ -229,9 +229,6 @@ p6df::modules::shell::path::init() {
 #>
 ######################################################################
 p6df::modules::shell::init() {
-
-  p6df::modules::shell::path::init
-
   p6_return_void
 }
 
