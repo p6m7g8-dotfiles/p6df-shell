@@ -17,7 +17,7 @@ p6df::modules::shell::deps() {
 #
 # Function: p6df::modules::shell::external:::home::symlink()
 #
-#  Environment:	 P6_DFZ_SRC_DIR P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
+#  Environment:	 P6_DFZ_SRC_DIR P6_DFZ_SRC_P6M7G8_DOTFILES_DIR USER
 #>
 ######################################################################
 p6df::modules::shell::external:::home::symlink() {
@@ -155,7 +155,7 @@ p6df::modules::shell::external::brew() {
 #	_module -
 #	dir -
 #
-#  Environment:	 ESTABLISHED FGT LISTEN LSCOLORS OSTYPE TERM USER
+#  Environment:	 LSCOLORS OSTYPE TERM USER
 #>
 ######################################################################
 p6df::modules::shell::aliases::init() {
@@ -232,7 +232,6 @@ p6df::modules::shell::path::init() {
 #  Returns:
 #	stream - 
 #
-#  Environment:	 TCP
 #>
 ######################################################################
 p6_shell_tcp_is() {
