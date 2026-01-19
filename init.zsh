@@ -8,7 +8,7 @@
 ######################################################################
 p6df::modules::shell::deps() {
   ModuleDeps=(
-    p6m7g8-dotfiles/p6shell
+    p6m7g8-dotfiles/p6common
   )
 }
 
@@ -40,7 +40,7 @@ p6df::modules::shell::external::yum() {
   sudo amazon-linux-extras install epel
   sudo yum install ShellCheck
 
-  wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq 
+  wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq
   sudo chmod +x /usr/bin/yq
 
   sudo yum install jq
@@ -189,7 +189,7 @@ p6df::modules::shell::aliases::init() {
   alias tarx='tar -xvzof'
   alias tart='tar -tvzf'
 
-  alias -g me="| grep $USER"
+  alias -g me='| grep $USER'
   alias -g ng='| grep -v "\.git"'
 
   alias xclean='p6_xclean'
@@ -224,20 +224,6 @@ p6df::modules::shell::path::init() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::shell::init()
-#
-#>
-######################################################################
-p6df::modules::shell::init() {
-
-  p6df::modules::shell::path::init
-
-  p6_return_void
-}
-
-######################################################################
-#<
-#
 # Function: stream  = p6_shell_tcp_is(port)
 #
 #  Args:
@@ -252,8 +238,7 @@ p6df::modules::shell::init() {
 p6_shell_tcp_is() {
   local port="$1"
 
-  lsof -iTCP:$port -sTCP:LISTEN -n -P
+  lsof -iTCP:"$port" -sTCP:LISTEN -n -P
 
   p6_return_stream
 }
-
