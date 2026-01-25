@@ -182,15 +182,15 @@ p6df::modules::shell::aliases::init() {
   alias whichlinux='uname -a; cat /etc/*release; cat /etc/issue'
 
   alias netstat='netstat -an -p tcp'
-  alias listen='netstat -an -p tcp | grep LISTEN'
+  alias listen='netstat -an -p tcp | p6_filter_row_select LISTEN'
   alias listenu='netstat -an -p udp'
-  alias established='netstat -an -p tcp | grep ESTABLISHED'
+  alias established='netstat -an -p tcp | p6_filter_row_select ESTABLISHED'
 
   alias tarx='tar -xvzof'
   alias tart='tar -tvzf'
 
-  alias -g me='| grep $USER'
-  alias -g ng='| grep -v "\.git"'
+  alias -g me='| p6_filter_row_select $USER'
+  alias -g ng='| p6_filter_row_exclude_regex "\.git"'
 
   alias xclean='p6_xclean'
 
