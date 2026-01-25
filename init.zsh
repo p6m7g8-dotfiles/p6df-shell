@@ -65,7 +65,7 @@ p6df::modules::shell::external::yum() {
 p6df::modules::shell::vscodes() {
 
   # shell
-  p6df::modules::homebrew::cli::brew::install shfmt
+  p6df::core::homebrew::cli::brew::install shfmt
   code --install-extension foxundermoon.shell-format
 
   code --install-extension timonwong.shellcheck
@@ -84,64 +84,64 @@ p6df::modules::shell::vscodes() {
 ######################################################################
 p6df::modules::shell::external::brew() {
 
-  p6df::modules::homebrew::cli::brew::install lsd
+  p6df::core::homebrew::cli::brew::install lsd
 
   brew tap sbdchd/skim
-  p6df::modules::homebrew::cli::brew::install skim --cask
+  p6df::core::homebrew::cli::brew::install skim --cask
 
-  p6df::modules::homebrew::cli::brew::install fzf
+  p6df::core::homebrew::cli::brew::install fzf
 
-  p6df::modules::homebrew::cli::brew::install aspell
-  p6df::modules::homebrew::cli::brew::install coreutils
-  p6df::modules::homebrew::cli::brew::install parallel
+  p6df::core::homebrew::cli::brew::install aspell
+  p6df::core::homebrew::cli::brew::install coreutils
+  p6df::core::homebrew::cli::brew::install parallel
 
-  p6df::modules::homebrew::cli::brew::install shellcheck
+  p6df::core::homebrew::cli::brew::install shellcheck
 
   brew tap kaos/shell
-  p6df::modules::homebrew::cli::brew::install bats-core
-  p6df::modules::homebrew::cli::brew::install bats-file
-  p6df::modules::homebrew::cli::brew::install bats-assert
-  p6df::modules::homebrew::cli::brew::install bats-mock
+  p6df::core::homebrew::cli::brew::install bats-core
+  p6df::core::homebrew::cli::brew::install bats-file
+  p6df::core::homebrew::cli::brew::install bats-assert
+  p6df::core::homebrew::cli::brew::install bats-mock
 
-  p6df::modules::homebrew::cli::brew::install jc
-  p6df::modules::homebrew::cli::brew::install jp
-  p6df::modules::homebrew::cli::brew::install jq
-  p6df::modules::homebrew::cli::brew::install yq
+  p6df::core::homebrew::cli::brew::install jc
+  p6df::core::homebrew::cli::brew::install jp
+  p6df::core::homebrew::cli::brew::install jq
+  p6df::core::homebrew::cli::brew::install yq
 
-  p6df::modules::homebrew::cli::brew::install recode
+  p6df::core::homebrew::cli::brew::install recode
 
-  p6df::modules::homebrew::cli::brew::install tree
+  p6df::core::homebrew::cli::brew::install tree
 
-  p6df::modules::homebrew::cli::brew::install aria2
-  p6df::modules::homebrew::cli::brew::install curl
-  p6df::modules::homebrew::cli::brew::install wget
-  p6df::modules::homebrew::cli::brew::install httpie --formula
-  p6df::modules::homebrew::cli::brew::install mtr
+  p6df::core::homebrew::cli::brew::install aria2
+  p6df::core::homebrew::cli::brew::install curl
+  p6df::core::homebrew::cli::brew::install wget
+  p6df::core::homebrew::cli::brew::install httpie --formula
+  p6df::core::homebrew::cli::brew::install mtr
 
-  p6df::modules::homebrew::cli::brew::install xz
+  p6df::core::homebrew::cli::brew::install xz
 
-  p6df::modules::homebrew::cli::brew::install z
+  p6df::core::homebrew::cli::brew::install z
 
-  p6df::modules::homebrew::cli::brew::install htop
-  p6df::modules::homebrew::cli::brew::install lsof
+  p6df::core::homebrew::cli::brew::install htop
+  p6df::core::homebrew::cli::brew::install lsof
 
-  p6df::modules::homebrew::cli::brew::install bgrep
-  p6df::modules::homebrew::cli::brew::install cgrep
-  p6df::modules::homebrew::cli::brew::install grepcidr
-  p6df::modules::homebrew::cli::brew::install ngrep
-  p6df::modules::homebrew::cli::brew::install pgrep
-  p6df::modules::homebrew::cli::brew::install pdfgrep
-  p6df::modules::homebrew::cli::brew::install psgrep
-  p6df::modules::homebrew::cli::brew::install ripgrep-all
+  p6df::core::homebrew::cli::brew::install bgrep
+  p6df::core::homebrew::cli::brew::install cgrep
+  p6df::core::homebrew::cli::brew::install grepcidr
+  p6df::core::homebrew::cli::brew::install ngrep
+  p6df::core::homebrew::cli::brew::install pgrep
+  p6df::core::homebrew::cli::brew::install pdfgrep
+  p6df::core::homebrew::cli::brew::install psgrep
+  p6df::core::homebrew::cli::brew::install ripgrep-all
 
-  p6df::modules::homebrew::cli::brew::install gpg
-  p6df::modules::homebrew::cli::brew::install gnupg
-  p6df::modules::homebrew::cli::brew::install pass
-  p6df::modules::homebrew::cli::brew::install pinentry-mac
-  p6df::modules::homebrew::cli::brew::install netcat
+  p6df::core::homebrew::cli::brew::install gpg
+  p6df::core::homebrew::cli::brew::install gnupg
+  p6df::core::homebrew::cli::brew::install pass
+  p6df::core::homebrew::cli::brew::install pinentry-mac
+  p6df::core::homebrew::cli::brew::install netcat
 
-  p6df::modules::homebrew::cli::brew::install ffmpeg
-  arch -arm64 p6df::modules::homebrew::cli::brew::install imagemagick
+  p6df::core::homebrew::cli::brew::install ffmpeg
+  arch -arm64 p6df::core::homebrew::cli::brew::install imagemagick
 
   p6_return_void
 }
