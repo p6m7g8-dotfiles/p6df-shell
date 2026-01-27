@@ -66,11 +66,34 @@ p6df::modules::shell::vscodes() {
 
   # shell
   p6df::core::homebrew::cli::brew::install shfmt
-  code --install-extension foxundermoon.shell-format
+  p6df::modules::vscode::extension::install foxundermoon.shell-format
 
-  code --install-extension timonwong.shellcheck
-  code --install-extension jetmartin.bats
-  code --install-extension ms-vscode-remote.remote-ssh
+  p6df::modules::vscode::extension::install timonwong.shellcheck
+  p6df::modules::vscode::extension::install jetmartin.bats
+  p6df::modules::vscode::extension::install ms-vscode-remote.remote-ssh
+
+  p6_return_void
+}
+
+######################################################################
+#<
+#
+# Function: str json = p6df::modules::shell::vscodes::config()
+#
+#  Returns:
+#	str - json
+#
+#>
+######################################################################
+p6df::modules::shell::vscodes::config() {
+
+  cat <<'EOF'
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "shellcheck.customArgs": ["-x", "--severity=error"],
+  "shellcheck.enableQuickFix": true
+EOF
 
   p6_return_void
 }
