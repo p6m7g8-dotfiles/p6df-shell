@@ -78,10 +78,7 @@ p6df::modules::shell::vscodes() {
 ######################################################################
 #<
 #
-# Function: str json = p6df::modules::shell::vscodes::config()
-#
-#  Returns:
-#	str - json
+# Function: p6df::modules::shell::vscodes::config()
 #
 #>
 ######################################################################
