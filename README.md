@@ -36,13 +36,19 @@ TODO: Add a short summary of this module.
 ##### p6df-shell/init.zsh
 
 - `p6df::modules::shell::aliases::init(_module, dir)`
+  - Args:
+    - _module - 
+    - dir - 
 - `p6df::modules::shell::deps()`
 - `p6df::modules::shell::external:::home::symlink()`
 - `p6df::modules::shell::external::brew()`
 - `p6df::modules::shell::external::yum()`
 - `p6df::modules::shell::path::init()`
 - `p6df::modules::shell::vscodes()`
+- `p6df::modules::shell::vscodes::config()`
 - `stream  = p6_shell_tcp_is(port)`
+  - Args:
+    - port - 
 
 ## Hierarchy
 
