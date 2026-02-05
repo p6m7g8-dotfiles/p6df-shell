@@ -86,7 +86,8 @@ p6df::modules::shell::vscodes::config() {
 
   cat <<'EOF'
   "[shellscript]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
+    "editor.defaultFormatter": "foxundermoon.shell-format",
+    "files.trimTrailingWhitespace": true
   },
   "shellcheck.customArgs": ["-x", "--severity=error"],
   "shellcheck.enableQuickFix": true
