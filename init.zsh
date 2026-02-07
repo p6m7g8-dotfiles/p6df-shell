@@ -65,9 +65,7 @@ p6df::modules::shell::external::yum() {
 p6df::modules::shell::vscodes() {
 
   # shell
-  p6df::core::homebrew::cli::brew::install shfmt
   p6df::modules::vscode::extension::install foxundermoon.shell-format
-
   p6df::modules::vscode::extension::install timonwong.shellcheck
   p6df::modules::vscode::extension::install jetmartin.bats
   p6df::modules::vscode::extension::install ms-vscode-remote.remote-ssh
@@ -86,11 +84,14 @@ p6df::modules::shell::vscodes::config() {
 
   cat <<'EOF'
   "[shellscript]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format",
-    "files.trimTrailingWhitespace": true
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.shellcheck": "explicit"
   },
   "shellcheck.customArgs": ["-x", "--severity=error"],
-  "shellcheck.enableQuickFix": true
+  "shellcheck.run": "onSave",
+  "shellformat.flag": "-i 2 -ci -sr"
 EOF
 
   p6_return_void
@@ -117,6 +118,7 @@ p6df::modules::shell::external::brew() {
   p6df::core::homebrew::cli::brew::install parallel
 
   p6df::core::homebrew::cli::brew::install shellcheck
+  p6df::core::homebrew::cli::brew::install shfmt
 
   brew tap kaos/shell
   p6df::core::homebrew::cli::brew::install bats-core
@@ -251,7 +253,7 @@ p6df::modules::shell::path::init() {
 #	port -
 #
 #  Returns:
-#	stream - 
+#	stream -
 #
 #>
 ######################################################################
