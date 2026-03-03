@@ -22,8 +22,7 @@ p6df::modules::shell::deps() {
 ######################################################################
 p6df::modules::shell::external:::home::symlink() {
 
-  p6_file_symlink "$P6_DFZ_SRC_DIR/$USER/home-private/gnupg" ".gnupg"
-  p6_file_symlink "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-shell/share/.parallel"
+  p6_file_symlink "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-shell/share/.parallel" "$HOME/.parallel"
 
   p6_return_void
 }

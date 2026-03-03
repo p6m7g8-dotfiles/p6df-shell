@@ -37,8 +37,8 @@ TODO: Add a short summary of this module.
 
 - `p6df::modules::shell::aliases::init(_module, dir)`
   - Args:
-    - _module - 
-    - dir - 
+    - _module -
+    - dir -
 - `p6df::modules::shell::deps()`
 - `p6df::modules::shell::external:::home::symlink()`
 - `p6df::modules::shell::external::brew()`
@@ -48,7 +48,7 @@ TODO: Add a short summary of this module.
 - `p6df::modules::shell::vscodes::config()`
 - `stream  = p6_shell_tcp_is(port)`
   - Args:
-    - port - 
+    - port -
 
 ## Hierarchy
 
