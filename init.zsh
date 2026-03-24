@@ -107,7 +107,7 @@ p6df::modules::shell::external::brew() {
 
   p6df::core::homebrew::cli::brew::install lsd
 
-  brew tap sbdchd/skim
+  p6df::core::homebrew::cmd::brew tap sbdchd/skim
   p6df::core::homebrew::cli::brew::install skim --cask
 
   p6df::core::homebrew::cli::brew::install fzf
@@ -119,7 +119,7 @@ p6df::modules::shell::external::brew() {
   p6df::core::homebrew::cli::brew::install shellcheck
   p6df::core::homebrew::cli::brew::install shfmt
 
-  brew tap kaos/shell
+  p6df::core::homebrew::cmd::brew tap kaos/shell
   p6df::core::homebrew::cli::brew::install bats-core
   p6df::core::homebrew::cli::brew::install bats-file
   p6df::core::homebrew::cli::brew::install bats-assert
@@ -184,45 +184,45 @@ p6df::modules::shell::aliases::init() {
   local _module="$1"
   local dir="$2"
 
-  alias '_'='sudo'
-  alias rmrf='rm -rf'
-  alias cpr='cp -R'
-  alias mvf='mv -f'
-  alias bclq='bc -lq'
-  alias grepr='grep -R'
+  p6_alias "_" "sudo"
+  p6_alias "rmrf" "rm -rf"
+  p6_alias "cpr" "cp -R"
+  p6_alias "mvf" "mv -f"
+  p6_alias "bclq" "bc -lq"
+  p6_alias "grepr" "grep -R"
 
-  alias j='jobs -l'
-  alias h='history 25'
-  alias duh='du -h'
-  alias history='fc -l 1'
+  p6_alias "j" "jobs -l"
+  p6_alias "h" "history 25"
+  p6_alias "duh" "du -h"
+  p6_alias "history" "fc -l 1"
 
-  alias 256color="export TERM=xterm-256color"
-  alias prettyjson="python -mjson.tool"
+  p6_alias "256color" "export TERM=xterm-256color"
+  p6_alias "prettyjson" "python -mjson.tool"
 
-  alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
+  p6_alias "myip" "dig +short myip.opendns.com @resolver1.opendns.com"
 
-  alias whichlinux='uname -a; cat /etc/*release; cat /etc/issue'
+  p6_alias "whichlinux" "uname -a; cat /etc/*release; cat /etc/issue"
 
-  alias netstat='netstat -an -p tcp'
-  alias listen='netstat -an -p tcp | p6_filter_row_select LISTEN'
-  alias listenu='netstat -an -p udp'
-  alias established='netstat -an -p tcp | p6_filter_row_select ESTABLISHED'
+  p6_alias "netstat" "netstat -an -p tcp"
+  p6_alias "listen" "netstat -an -p tcp | p6_filter_row_select LISTEN"
+  p6_alias "listenu" "netstat -an -p udp"
+  p6_alias "established" "netstat -an -p tcp | p6_filter_row_select ESTABLISHED"
 
-  alias tarx='tar -xvzof'
-  alias tart='tar -tvzf'
+  p6_alias "tarx" "tar -xvzof"
+  p6_alias "tart" "tar -tvzf"
 
   alias -g me='| p6_filter_row_select $USER'
   alias -g ng='| p6_filter_row_exclude_regex "\.git"'
 
-  alias xclean='p6_xclean'
+  p6_alias "xclean" "p6_xclean"
 
   p6_env_export LSCOLORS "Gxfxcxdxbxegedabagacad"
   case "$OSTYPE" in
-  freebsd* | darwin*) alias ll='ls -alFGTh' ;;
-  *) alias ll='/bin/ls -alFh --color=auto' ;;
+  freebsd* | darwin*) p6_alias "ll" "ls -alFGTh" ;;
+  *) p6_alias "ll" "/bin/ls -alFh --color=auto" ;;
   esac
 
-  alias ssh_key_check=p6_ssh_key_check
+  p6_alias "ssh_key_check" "p6_ssh_key_check"
 
   p6_return_void
 }
