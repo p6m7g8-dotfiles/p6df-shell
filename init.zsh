@@ -99,11 +99,11 @@ EOF
 ######################################################################
 #<
 #
-# Function: p6df::modules::shell::external::brew()
+# Function: p6df::modules::shell::external::brews()
 #
 #>
 ######################################################################
-p6df::modules::shell::external::brew() {
+p6df::modules::shell::external::brews() {
 
   p6df::core::homebrew::cli::brew::install lsd
 
