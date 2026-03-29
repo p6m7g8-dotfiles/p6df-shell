@@ -15,14 +15,16 @@ p6df::modules::shell::deps() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::shell::external:::home::symlink()
+# Function: p6df::modules::shell::home::symlinks()
 #
 #  Environment:	 P6_DFZ_SRC_DIR P6_DFZ_SRC_P6M7G8_DOTFILES_DIR USER
 #>
 ######################################################################
-p6df::modules::shell::external:::home::symlink() {
+p6df::modules::shell::home::symlinks() {
 
   p6_file_symlink "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-shell/share/.parallel" "$HOME/.parallel"
+  p6_file_symlink "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-shell/share/.aspell.en.pws" "$HOME/.aspell.en.pws"
+  p6_file_symlink "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-shell/share/.aspell.en.prepl" "$HOME/.aspell.en.prepl"
 
   p6_return_void
 }
