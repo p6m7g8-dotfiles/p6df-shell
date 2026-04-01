@@ -17,7 +17,7 @@ p6df::modules::shell::deps() {
 #
 # Function: p6df::modules::shell::home::symlinks()
 #
-#  Environment:	 P6_DFZ_SRC_DIR P6_DFZ_SRC_P6M7G8_DOTFILES_DIR USER
+#  Environment:	 HOME P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
 #>
 ######################################################################
 p6df::modules::shell::home::symlinks() {
@@ -25,33 +25,6 @@ p6df::modules::shell::home::symlinks() {
   p6_file_symlink "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-shell/share/.parallel" "$HOME/.parallel"
   p6_file_symlink "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-shell/share/.aspell.en.pws" "$HOME/.aspell.en.pws"
   p6_file_symlink "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-shell/share/.aspell.en.prepl" "$HOME/.aspell.en.prepl"
-
-  p6_return_void
-}
-
-######################################################################
-#<
-#
-# Function: p6df::modules::shell::external::yum()
-#
-#>
-######################################################################
-p6df::modules::shell::external::yum() {
-
-  sudo amazon-linux-extras install epel
-  sudo yum install ShellCheck
-
-  wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq
-  sudo chmod +x /usr/bin/yq
-
-  sudo yum install jq
-  sudo yum install recode
-  sudo yum install screen
-  sudo yum install tmux
-  sudo yum install tree
-  sudo yum install curl
-  sudo yum install wget
-  sudo yum install lsof
 
   p6_return_void
 }
@@ -239,6 +212,8 @@ p6df::modules::shell::aliases::init() {
 ######################################################################
 p6df::modules::shell::path::init() {
 
+  local _module="$1"
+  local _dir="$2"
   p6_path_if "$HOMEBREW_PREFIX/opt/lsof/bin" "prepend"
   p6_path_if "$HOMEBREW_PREFIX/opt/curl/bin" "prepend"
 
@@ -254,7 +229,7 @@ p6df::modules::shell::path::init() {
 #	port -
 #
 #  Returns:
-#	stream -
+#	stream - 
 #
 #>
 ######################################################################
