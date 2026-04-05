@@ -1,11 +1,24 @@
 # shellcheck shell=bash
 ######################################################################
+#<
+#
+# Function: p6df::modules::shell::deps()
+#
+#>
+######################################################################
 p6df::modules::shell::deps() {
   ModuleDeps=(
     p6m7g8-dotfiles/p6common
   )
 }
 
+######################################################################
+#<
+#
+# Function: p6df::modules::shell::path::init()
+#
+#  Environment:	 HOMEBREW_PREFIX
+#>
 ######################################################################
 p6df::modules::shell::path::init() {
 
@@ -17,6 +30,17 @@ p6df::modules::shell::path::init() {
   p6_return_void
 }
 
+######################################################################
+#<
+#
+# Function: p6df::modules::shell::aliases::init(_module, dir)
+#
+#  Args:
+#	_module -
+#	dir -
+#
+#  Environment:	 LSCOLORS OSTYPE TERM USER
+#>
 ######################################################################
 p6df::modules::shell::aliases::init() {
   local _module="$1"
@@ -66,6 +90,13 @@ p6df::modules::shell::aliases::init() {
 }
 
 ######################################################################
+#<
+#
+# Function: p6df::modules::shell::home::symlinks()
+#
+#  Environment:	 HOME P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
+#>
+######################################################################
 p6df::modules::shell::home::symlinks() {
 
   p6_file_symlink "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-shell/share/.parallel" "$HOME/.parallel"
@@ -75,6 +106,12 @@ p6df::modules::shell::home::symlinks() {
   p6_return_void
 }
 
+######################################################################
+#<
+#
+# Function: p6df::modules::shell::external::brews()
+#
+#>
 ######################################################################
 p6df::modules::shell::external::brews() {
 
@@ -142,6 +179,12 @@ p6df::modules::shell::external::brews() {
 }
 
 ######################################################################
+#<
+#
+# Function: p6df::modules::shell::vscodes()
+#
+#>
+######################################################################
 p6df::modules::shell::vscodes() {
 
   # shell
@@ -153,6 +196,12 @@ p6df::modules::shell::vscodes() {
   p6_return_void
 }
 
+######################################################################
+#<
+#
+# Function: p6df::modules::shell::vscodes::config()
+#
+#>
 ######################################################################
 p6df::modules::shell::vscodes::config() {
 
@@ -171,55 +220,6 @@ EOF
   p6_return_void
 }
 
-######################################################################
-#<
-#
-# Function: p6df::modules::shell::deps()
-#
-#>
-######################################################################
-#<
-#
-# Function: p6df::modules::shell::home::symlinks()
-#
-#  Environment:	 HOME P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
-#>
-######################################################################
-#<
-#
-# Function: p6df::modules::shell::vscodes()
-#
-#>
-######################################################################
-#<
-#
-# Function: p6df::modules::shell::vscodes::config()
-#
-#>
-######################################################################
-#<
-#
-# Function: p6df::modules::shell::external::brews()
-#
-#>
-######################################################################
-#<
-#
-# Function: p6df::modules::shell::aliases::init(_module, dir)
-#
-#  Args:
-#	_module -
-#	dir -
-#
-#  Environment:	 LSCOLORS OSTYPE TERM USER
-#>
-######################################################################
-#<
-#
-# Function: p6df::modules::shell::path::init()
-#
-#  Environment:	 HOMEBREW_PREFIX
-#>
 ######################################################################
 #<
 #
