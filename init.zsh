@@ -15,6 +15,83 @@ p6df::modules::shell::deps() {
 ######################################################################
 #<
 #
+# Function: p6df::modules::shell::path::init()
+#
+#  Environment:	 HOMEBREW_PREFIX
+#>
+######################################################################
+p6df::modules::shell::path::init() {
+
+  local _module="$1"
+  local _dir="$2"
+  p6_path_if "$HOMEBREW_PREFIX/opt/lsof/bin" "prepend"
+  p6_path_if "$HOMEBREW_PREFIX/opt/curl/bin" "prepend"
+
+  p6_return_void
+}
+
+######################################################################
+#<
+#
+# Function: p6df::modules::shell::aliases::init(_module, dir)
+#
+#  Args:
+#	_module -
+#	dir -
+#
+#  Environment:	 LSCOLORS OSTYPE TERM USER
+#>
+######################################################################
+p6df::modules::shell::aliases::init() {
+  local _module="$1"
+  local dir="$2"
+
+  p6_alias "_" "sudo"
+  p6_alias "rmrf" "rm -rf"
+  p6_alias "cpr" "cp -R"
+  p6_alias "mvf" "mv -f"
+  p6_alias "bclq" "bc -lq"
+  p6_alias "grepr" "grep -R"
+
+  p6_alias "j" "jobs -l"
+  p6_alias "h" "history 25"
+  p6_alias "duh" "du -h"
+  p6_alias "history" "fc -l 1"
+
+  p6_alias "256color" "export TERM=xterm-256color"
+  p6_alias "prettyjson" "python -mjson.tool"
+
+  p6_alias "myip" "dig +short myip.opendns.com @resolver1.opendns.com"
+
+  p6_alias "whichlinux" "uname -a; cat /etc/*release; cat /etc/issue"
+
+  p6_alias "netstat" "netstat -an -p tcp"
+  p6_alias "listen" "netstat -an -p tcp | p6_filter_row_select LISTEN"
+  p6_alias "listenu" "netstat -an -p udp"
+  p6_alias "established" "netstat -an -p tcp | p6_filter_row_select ESTABLISHED"
+
+  p6_alias "tarx" "tar -xvzof"
+  p6_alias "tart" "tar -tvzf"
+
+  alias -g me='| p6_filter_row_select $USER'
+  alias -g ng='| p6_filter_row_exclude_regex "\.git"'
+
+  p6_alias "xclean" "p6_xclean"
+
+  p6_env_export LSCOLORS "Gxfxcxdxbxegedabagacad"
+  case "$OSTYPE" in
+  freebsd* | darwin*) p6_alias "ll" "ls -alFGTh" ;;
+  *) p6_alias "ll" "/bin/ls -alFh --color=auto" ;;
+  esac
+
+  p6_alias "ssh_key_check" "p6_ssh_key_check"
+
+  p6_return_void
+}
+
+######################################################################
+#<
+#
 # Function: p6df::modules::shell::home::symlinks()
 #
 #  Environment:	 HOME P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
@@ -25,48 +102,6 @@ p6df::modules::shell::home::symlinks() {
   p6_file_symlink "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-shell/share/.parallel" "$HOME/.parallel"
   p6_file_symlink "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-shell/share/.aspell.en.pws" "$HOME/.aspell.en.pws"
   p6_file_symlink "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-shell/share/.aspell.en.prepl" "$HOME/.aspell.en.prepl"
-
-  p6_return_void
-}
-
-######################################################################
-#<
-#
-# Function: p6df::modules::shell::vscodes()
-#
-#>
-######################################################################
-p6df::modules::shell::vscodes() {
-
-  # shell
-  p6df::modules::vscode::extension::install foxundermoon.shell-format
-  p6df::modules::vscode::extension::install timonwong.shellcheck
-  p6df::modules::vscode::extension::install jetmartin.bats
-  p6df::modules::vscode::extension::install ms-vscode-remote.remote-ssh
-
-  p6_return_void
-}
-
-######################################################################
-#<
-#
-# Function: p6df::modules::shell::vscodes::config()
-#
-#>
-######################################################################
-p6df::modules::shell::vscodes::config() {
-
-  cat <<'EOF'
-  "[shellscript]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
-  },
-  "editor.codeActionsOnSave": {
-    "source.fixAll.shellcheck": "explicit"
-  },
-  "shellcheck.customArgs": ["-x", "--severity=error"],
-  "shellcheck.run": "onSave",
-  "shellformat.flag": "-i 2 -ci -sr"
-EOF
 
   p6_return_void
 }
@@ -146,58 +181,17 @@ p6df::modules::shell::external::brews() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::shell::aliases::init(_module, dir)
+# Function: p6df::modules::shell::vscodes()
 #
-#  Args:
-#	_module -
-#	dir -
-#
-#  Environment:	 LSCOLORS OSTYPE TERM USER
 #>
 ######################################################################
-p6df::modules::shell::aliases::init() {
-  local _module="$1"
-  local dir="$2"
+p6df::modules::shell::vscodes() {
 
-  p6_alias "_" "sudo"
-  p6_alias "rmrf" "rm -rf"
-  p6_alias "cpr" "cp -R"
-  p6_alias "mvf" "mv -f"
-  p6_alias "bclq" "bc -lq"
-  p6_alias "grepr" "grep -R"
-
-  p6_alias "j" "jobs -l"
-  p6_alias "h" "history 25"
-  p6_alias "duh" "du -h"
-  p6_alias "history" "fc -l 1"
-
-  p6_alias "256color" "export TERM=xterm-256color"
-  p6_alias "prettyjson" "python -mjson.tool"
-
-  p6_alias "myip" "dig +short myip.opendns.com @resolver1.opendns.com"
-
-  p6_alias "whichlinux" "uname -a; cat /etc/*release; cat /etc/issue"
-
-  p6_alias "netstat" "netstat -an -p tcp"
-  p6_alias "listen" "netstat -an -p tcp | p6_filter_row_select LISTEN"
-  p6_alias "listenu" "netstat -an -p udp"
-  p6_alias "established" "netstat -an -p tcp | p6_filter_row_select ESTABLISHED"
-
-  p6_alias "tarx" "tar -xvzof"
-  p6_alias "tart" "tar -tvzf"
-
-  alias -g me='| p6_filter_row_select $USER'
-  alias -g ng='| p6_filter_row_exclude_regex "\.git"'
-
-  p6_alias "xclean" "p6_xclean"
-
-  p6_env_export LSCOLORS "Gxfxcxdxbxegedabagacad"
-  case "$OSTYPE" in
-  freebsd* | darwin*) p6_alias "ll" "ls -alFGTh" ;;
-  *) p6_alias "ll" "/bin/ls -alFh --color=auto" ;;
-  esac
-
-  p6_alias "ssh_key_check" "p6_ssh_key_check"
+  # shell
+  p6df::modules::vscode::extension::install foxundermoon.shell-format
+  p6df::modules::vscode::extension::install timonwong.shellcheck
+  p6df::modules::vscode::extension::install jetmartin.bats
+  p6df::modules::vscode::extension::install ms-vscode-remote.remote-ssh
 
   p6_return_void
 }
@@ -205,17 +199,23 @@ p6df::modules::shell::aliases::init() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::shell::path::init()
+# Function: p6df::modules::shell::vscodes::config()
 #
-#  Environment:	 HOMEBREW_PREFIX
 #>
 ######################################################################
-p6df::modules::shell::path::init() {
+p6df::modules::shell::vscodes::config() {
 
-  local _module="$1"
-  local _dir="$2"
-  p6_path_if "$HOMEBREW_PREFIX/opt/lsof/bin" "prepend"
-  p6_path_if "$HOMEBREW_PREFIX/opt/curl/bin" "prepend"
+  cat <<'EOF'
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.shellcheck": "explicit"
+  },
+  "shellcheck.customArgs": ["-x", "--severity=error"],
+  "shellcheck.run": "onSave",
+  "shellformat.flag": "-i 2 -ci -sr"
+EOF
 
   p6_return_void
 }
