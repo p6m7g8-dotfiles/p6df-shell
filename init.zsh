@@ -15,7 +15,11 @@ p6df::modules::shell::deps() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::shell::path::init()
+# Function: p6df::modules::shell::path::init(_module, _dir)
+#
+#  Args:
+#	_module -
+#	_dir -
 #
 #  Environment:	 HOMEBREW_PREFIX
 #>
@@ -220,23 +224,3 @@ EOF
   p6_return_void
 }
 
-######################################################################
-#<
-#
-# Function: stream  = p6_shell_tcp_is(port)
-#
-#  Args:
-#	port -
-#
-#  Returns:
-#	stream - 
-#
-#>
-######################################################################
-p6_shell_tcp_is() {
-  local port="$1"
-
-  lsof -iTCP:"$port" -sTCP:LISTEN -n -P
-
-  p6_return_stream
-}
